@@ -432,21 +432,26 @@ Save this code into a ps1 file and execute it accordingly.
 
 ## Example: 
 Let's imagine that we are running the script to export an Azure Policy Initiative definition with id e1f68c1e15a64882b6552acd 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](Picture1.png)
+
+![Screenshot of the initiative to export.](Picture1.png)
   
-After running the script with direction Export: 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](Picture2.png)
+After running the script with direction Export:
+
+![Screenshot of output after runnint the script.](Picture2.png)
  
-You will end up with the following files: 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](Picture3.png)
+You will end up with the following files:
+
+![Screenshot of files generated.](Picture3.png)
 
 •	The file “e1f68c1e15a64882b6552acd-def.json” will hold the Azure Policy Initiative definition with the reference to the Azure Policy definitions contained in it. 
 •	The file “e1f68c1e15a64882b6552acd-params.json” will hold the Azure Policy Initiative definition parameters. 
-•	The file “Mappings-e1f68c1e15a64882b6552acd.csv” will contain the relation between Azure Policy Initiative definition/Azure Policy definitions Ids and their display name and category. 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](Picture4.png)
+•	The file “Mappings-e1f68c1e15a64882b6552acd.csv” will contain the relation between Azure Policy Initiative definition/Azure Policy definitions Ids and their display name and category.
+
+![Screenshot of mappings file.](Picture4.png)
 You can use this file to rename the Azure Policy Initiative / Azure Policy definitions on the target scope 
 •	The folder will contain all the json files related to the Azure Policy definitions  and its parameters: 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](Picture5.png)
+
+![Screenshot of the files containing parameters and policy definition.](Picture5.png)
 
 This Azure Policy Initiative definition is composed by 4 Azure Policy definitions, but because one is a built-in, we only have 6 files 2 per each of the 3 custom Azure Policy definitions (Definition + Parameters). 
 The built-in Azure Policy definitions exist by default in all subscriptions. 
