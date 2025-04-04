@@ -1,5 +1,7 @@
 # Copy Azure Policy Initiative definitions across scopes
-02 January 2024 
+Creation date: 02 January 2024 \
+Last Update: 04 April 2025\
+Version 1.0\
 
 ## Index
 - [Scenario](#Scenario)
@@ -513,6 +515,7 @@ It is recommended that you use the script in 2 steps:
 - First you export and validate the exported data. 
 - Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. 
 If you need to adjust the display names or categories of the Azure Policy Initiative definition and Azure Policy definitions you can use the mappings CSV that is created by the export part of the script. 
+- You should be able to run this on CloudShell if you upload the script there.
 
 [Back to Index](#index)
   
