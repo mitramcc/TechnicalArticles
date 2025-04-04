@@ -1,7 +1,7 @@
 # Copy Azure Policy Initiative definitions across scopes
-Creation date: 02 January 2024 \
-Last Update: 04 April 2025\
-Version 1.0\
+**Creation date:** 02 January 2024 \
+**Last Update:** 04 April 2025 \
+**Version:** 1.0
 
 ## Index
 - [Scenario](#Scenario)
