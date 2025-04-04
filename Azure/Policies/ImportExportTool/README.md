@@ -1,5 +1,18 @@
 # Copy Azure Policy Initiative definitions across scopes
 02 January 2024 
+
+## Index
+- [Scenario](#Scenario)
+- [Permissions Needed](#permissions-needed)
+- [Export](#export)
+- [Import](#Import)
+- [Script Parameters](#script-parameters)
+- [Script Code](#script-code)
+- [Sample commands](#sample-commands)
+- [Example](#example)
+- [Known Limitations](#limitations-of-the-script)
+- [Best Practices](#recommendations)
+
  
 ## Teaser 
 Imagine you are trying to copy an Azure Policy Initiative definition and all its Azure Policy definitions from one subscription to another. This Azure Policy Initiative definition is composed of built-in and custom Azure Policy definitions. Without an automation you would need to copy the Json of each custom Azure Policy definition and its parameters, then copy the json of the Azure Policy Initiative definition and its parameters and create it on the new subscription. The logic I used in the script below is the same. 
@@ -19,7 +32,7 @@ Write permissions on the folder where you are running the script from
 Reader access to the Source Scope
 Policy Contributor on the Target Scope
  
-## Export - Download from source: 
+## <a name="export">Export - Download from source:</a> 
 During the export phase some files and folders will be created therefore make sure you have permissions to write on the destination folder. 
 The new files created will be: 
 - <InitiativeId>.json - Azure Policy Initiative definition 
@@ -27,13 +40,14 @@ The new files created will be:
 - Folder with name of the InitiativeId that will contain custom policies. 
 - Mappings-<InitiativeId>.csv - this file is used to keep the original names and category of Azure Policy Initiative definition and Azure Policy definitions. 
  
-## Import – Upload to the destination: 
+## <a name="import">Import – Upload to the destination: </a>
 During the import, the script scans the folder looking for the value passed on the parameter $initiativeId . If it finds the json definition file, it will look for the folder that should have the custom Azure Policy definitions and it will start by creating those on the destination, once that completes it will use the Azure Policy Initiative definition file and create the Azure Policy Initiative. 
 When running this step separately you should make sure that the InitiativeId.json file is updated to reflect the target scope. 
 Example: you have exported from subscription AAA and you are importing to Management group XXX you need to replace each policyDefinitionId in the json from /subscription/AAA/ providers/Microsoft.Authorization/policyDefinitions/PolixyExample to /providers/microsoft.management/managementgroups/XXX/providers/microsoft.authorization/policyDefinitions/PolixyExample 
   
  
 ## Script Parameters 
+
 **$direction:**
 The direction controls whether the script will export from source, import to destination, or do both at once (Full). The allowed values are Export, Import, Full. 
   
@@ -439,7 +453,8 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
 
 Save this code into a ps1 file and execute it accordingly. 
  
-## Sample execution commands: 
+## <a name="sample-commands">Sample execution commands: </a>
+
 **Export on subscription:**
 .\Export_Import_Initiative.ps1 -direction Export -ini _#InitiativeID#_ -scope Sub -src _#SubId#_ -verbose 
  
