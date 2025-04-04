@@ -443,13 +443,13 @@ You will end up with the following files:
 
 ![Screenshot of files generated.](Picture3.png)
 
-•	The file “e1f68c1e15a64882b6552acd-def.json” will hold the Azure Policy Initiative definition with the reference to the Azure Policy definitions contained in it. 
-•	The file “e1f68c1e15a64882b6552acd-params.json” will hold the Azure Policy Initiative definition parameters. 
-•	The file “Mappings-e1f68c1e15a64882b6552acd.csv” will contain the relation between Azure Policy Initiative definition/Azure Policy definitions Ids and their display name and category.
+- The file “e1f68c1e15a64882b6552acd-def.json” will hold the Azure Policy Initiative definition with the reference to the Azure Policy definitions contained in it. 
+- The file “e1f68c1e15a64882b6552acd-params.json” will hold the Azure Policy Initiative definition parameters. 
+- The file “Mappings-e1f68c1e15a64882b6552acd.csv” will contain the relation between Azure Policy Initiative definition/Azure Policy definitions Ids and their display name and category.
 
 ![Screenshot of mappings file.](Picture4.png)
 You can use this file to rename the Azure Policy Initiative / Azure Policy definitions on the target scope 
-•	The folder will contain all the json files related to the Azure Policy definitions  and its parameters: 
+- The folder will contain all the json files related to the Azure Policy definitions  and its parameters: 
 
 ![Screenshot of the files containing parameters and policy definition.](Picture5.png)
 
@@ -457,13 +457,13 @@ This Azure Policy Initiative definition is composed by 4 Azure Policy definition
 The built-in Azure Policy definitions exist by default in all subscriptions. 
  
 ## Limitations of the script: 
-•	Running the Export + Import in one go using the $direction parameter with value "Full" will only work if you are in same tenant and if done from Subscription to Subscription or Management Group to Management group. 
-•	When running export on Azure Policy definitions that have parameters pointing to resources withing the source scope, you might need to manually adjust those to reflect a valid parameter on the target scope. 
+- Running the Export + Import in one go using the $direction parameter with value "Full" will only work if you are in same tenant and if done from Subscription to Subscription or Management Group to Management group. 
+- When running export on Azure Policy definitions that have parameters pointing to resources withing the source scope, you might need to manually adjust those to reflect a valid parameter on the target scope. 
   
 ## Recommendations: 
 It is recommended that you use the script in 2 steps: 
-•	First you export and validate the exported data. 
-•	Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. 
+- First you export and validate the exported data. 
+- Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. 
 If you need to adjust the display names or categories of the Azure Policy Initiative definition and Azure Policy definitions you can use the mappings CSV that is created by the export part of the script. 
   
 ## Documentation for Az PowerShell commands used: 
