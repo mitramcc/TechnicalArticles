@@ -441,13 +441,13 @@ Save this code into a ps1 file and execute it accordingly.
  
 ## Sample execution commands: 
 **Export on subscription:**
-.\Export_Import_Initiative.ps1 -direction Export -ini \<InitiativeID\> -scope Sub -src <SubId> -verbose 
+.\Export_Import_Initiative.ps1 -direction Export -ini _#InitiativeID#_ -scope Sub -src _#SubId#_ -verbose 
  
 **Import to subscription:**
-.\Export_Import_Initiative.ps1 -direction Import -ini \<InitiativeID\> -scope Sub -trgt <SubId> -verbose 
+.\Export_Import_Initiative.ps1 -direction Import -ini _#InitiativeID#_ -scope Sub -trgt _#SubId#_ -verbose 
  
 **Full (Export + Import) on subscription scope:**
-.\Export_Import_Initiative.ps1 -direction Full -ini \<InitiativeID\> -scope Sub -source <SubIdA> -t <SubIdB> -verbose 
+.\Export_Import_Initiative.ps1 -direction Full -ini _#InitiativeID#_ -scope Sub -source _#SubId-from#_ -t _#SubId-to#_ -verbose 
 
 
 ## Example: 
