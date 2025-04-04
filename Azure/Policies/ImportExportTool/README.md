@@ -504,7 +504,7 @@ The built-in Azure Policy definitions exist by default in all subscriptions.
  
 ## Limitations of the script: 
 - Running the Export + Import in one go using the $direction parameter with value "Full" will only work if you are in same tenant and if done from Subscription to Subscription or Management Group to Management group. 
-- When running export on Azure Policy definitions that have parameters pointing to resources withing the source scope, you might need to manually adjust those to reflect a valid parameter on the target scope. 
+- When running export on Azure Policy definitions that have parameters pointing to resources within the source scope, you might need to manually adjust those to reflect a valid parameter on the target scope. 
 
 [Back to Index](#index)
   
