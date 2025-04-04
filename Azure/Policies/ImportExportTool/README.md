@@ -464,6 +464,7 @@ Save this code into a ps1 file and execute it accordingly.
 **Full (Export + Import) on subscription scope:**
 .\Export_Import_Initiative.ps1 -direction Full -ini _#InitiativeID#_ -scope Sub -source _#SubId-from#_ -t _#SubId-to#_ -verbose 
 
+[Back to Index](#index)
 
 ## Example: 
 Let's imagine that we are running the script to export an Azure Policy Initiative definition with id e1f68c1e15a64882b6552acd 
@@ -490,16 +491,22 @@ You can use this file to rename the Azure Policy Initiative / Azure Policy defin
 
 This Azure Policy Initiative definition is composed by 4 Azure Policy definitions, but because one is a built-in, we only have 6 files 2 per each of the 3 custom Azure Policy definitions (Definition + Parameters). 
 The built-in Azure Policy definitions exist by default in all subscriptions. 
+
+[Back to Index](#index)
  
 ## Limitations of the script: 
 - Running the Export + Import in one go using the $direction parameter with value "Full" will only work if you are in same tenant and if done from Subscription to Subscription or Management Group to Management group. 
 - When running export on Azure Policy definitions that have parameters pointing to resources withing the source scope, you might need to manually adjust those to reflect a valid parameter on the target scope. 
+
+[Back to Index](#index)
   
-## Recommendations: 
+## Recommendations:
 It is recommended that you use the script in 2 steps: 
 - First you export and validate the exported data. 
 - Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. 
 If you need to adjust the display names or categories of the Azure Policy Initiative definition and Azure Policy definitions you can use the mappings CSV that is created by the export part of the script. 
+
+[Back to Index](#index)
   
 ## Documentation for Az PowerShell commands used: 
 - [https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0)
