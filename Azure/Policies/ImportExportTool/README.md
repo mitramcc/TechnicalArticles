@@ -100,6 +100,7 @@ Link to the file [Export_Import_Initiative.ps1](Export_Import_Initiative.ps1)
 ## <a name="sample-commands">Sample execution commands: </a>
 
 **Export on subscription:**
+
 .\Export_Import_Initiative.ps1 -direction Export -ini _#InitiativeID#_ -scope Sub -src _#SourceSubId#_ -ow -verbose
 
 .\Export_Import_Initiative.ps1 -direction Export -ini _#InitiativeID#_ -scope Sub -src _#SourceSubId#_ -trgt _#TargetSubId#_ -ow -verbose
@@ -108,12 +109,18 @@ Link to the file [Export_Import_Initiative.ps1](Export_Import_Initiative.ps1)
 
 .\Export_Import_Initiative.ps1 -direction Export -ini _#InitiativeID#_ -scope mg -src _#SourceManagmentGroup#_ -trgt _#TargetManagmentGroup#_ -ow -verbose 
  
+
+
 **Import to subscription:**
+
 .\Export_Import_Initiative.ps1 -direction Import -ini _#InitiativeID#_ -scope Sub -trgt _#TargetSubId#_ -verbose
 
 .\Export_Import_Initiative.ps1 -direction Import -ini _#InitiativeID#_ -scope mg -trgt _#TargetManagmentGroup#_ -verbose 
  
+
+
 **Full (Export + Import) on subscription scope:**
+
 .\Export_Import_Initiative.ps1 -direction Full -ini _#InitiativeID#_ -scope Sub -source _#SourceSubId#_ -t _#TargetSubId#_ -verbose 
 
 .\Export_Import_Initiative.ps1 -direction Full -ini _#InitiativeID#_ -scope mg -source _#SourceManagmentGroup#_ -t _#TargetManagmentGroup#_ -verbose 
