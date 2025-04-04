@@ -467,10 +467,10 @@ It is recommended that you use the script in 2 steps:
 If you need to adjust the display names or categories of the Azure Policy Initiative definition and Azure Policy definitions you can use the mappings CSV that is created by the export part of the script. 
   
 ## Documentation for Az PowerShell commands used: 
-[https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0)
-[https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicysetdefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicysetdefinition?view=azps-11.1.0)
-[https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0)
-[https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0)
+- [https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicydefinition?view=azps-11.1.0)
+- [https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicysetdefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/new-azpolicysetdefinition?view=azps-11.1.0)
+- [https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0)
+- [https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0)
  
  
 ## Disclaimer: 
