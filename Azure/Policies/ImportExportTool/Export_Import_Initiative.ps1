@@ -1,6 +1,6 @@
 <# 
 Disclaimer: This script is not supported under any Microsoft standard support program or service. This script is provided AS IS without warranty of any kind. Microsoft further disclaims all implied warranties including, without limitation, any implied warranties of merchantability or of fitness for a particular purpose. The entire risk arising out of the use or performance of the script and documentation remains with you. In no event shall Microsoft, its authors, or anyone else involved in the creation, production, or delivery of the script be liable for any damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or other pecuniary loss) arising out of the use of or inability to use the current script or documentation, even if Microsoft has been advised of the possibility of such damages.
-## Version: 1.1
+## Version: 1.2
 #>
 
 param (
@@ -192,16 +192,18 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
             
             $propertiesExist = [bool]($_.PSobject.Properties.name -match "Properties")
             if($propertiesExist){
-                $properties              = $_ | Select-object -ExpandProperty Properties
+                $properties              = $_ | Select-object -ExpandProperty Properties        
                 $initiativeName          = $properties | Select-Object -Property DisplayName
                 $initiativeParams        = $properties | Select-object -ExpandProperty  Parameters | ConvertTo-Json -Depth 100 
                 $InitiativeDefinitionObj = $properties | Select-object -ExpandProperty PolicyDefinitions
                 $metadata                = $properties | Select-object -ExpandProperty Metadata
+                $policyGroups            = $properties | Select-object -ExpandProperty PolicyDefinitionGroup
             } else {
                 $initiativeName          = $_ | Select-Object -Property DisplayName
                 $initiativeParams        = $_ | Select-object -ExpandProperty  Parameter | ConvertTo-Json -Depth 100 
                 $InitiativeDefinitionObj = $_ | Select-object -ExpandProperty PolicyDefinition
                 $metadata                = $_ | Select-object -ExpandProperty Metadata
+                $policyGroups            = $_ | Select-object -ExpandProperty PolicyDefinitionGroup
             }
             Write-Verbose "Exporting InitiativeDisplayName: $($initiativeName.DisplayName)"
 
@@ -226,13 +228,22 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
 
             if($overwrite){
                 $InitiativeDefinitionJson | Out-File -FilePath "$($folderPath)-def.json"
+                
+                if (-not ([string]::IsNullOrEmpty($policyGroups))){
+                    $policyGroups | ConvertTo-Json -Depth 100 -AsArray | Out-File -FilePath "$($folderPath)-groups.json"
+                } 
             } else {
                 $InitiativeDefinitionJson | Out-File -FilePath "$($folderPath)-def.json" -NoClobber
+                
+                if (-not ([string]::IsNullOrEmpty($policyGroups))){
+                    $policyGroups | ConvertTo-Json -Depth 100 -AsArray | Out-File -FilePath "$($folderPath)-groups.json" -NoClobber
+                } 
             }
-            
+
             Write-Debug "Exporting policyDefRule: $($InitiativeDefinitionJson)"
             Write-Debug "Exporting policyDefParams: $($initiativeParams)"
             Write-Verbose "Exporting InitiativeDefJsonPath: $($folderPath)-def.json"
+            Write-Verbose "Exporting policyGroups: $($folderPath)-groups.json"
 
             if (([string]::IsNullOrEmpty($initiativeName.DisplayName))){
                 $initiativeDisplayName = $InitiativeID
@@ -329,15 +340,37 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
                 $initiativeParametersFilePath = $_.initiativeParametersFilePath
                 Write-Verbose "InitiativeParametesFile: $($initiativeParametersFilePath)"
             }
+
+            #check if has groups file
+            $initiativeGroupsFilePath = $false
+            Get-ChildItem -Path . -Filter "$($initiativeName)-groups.json" `
+            | Select-Object @{Name = 'initiativeGroupsFilePath'; Expression = {$_.FullName}} `
+            | Foreach-Object {
+                $initiativeGroupsFilePath = $_.initiativeGroupsFilePath
+                Write-Verbose "InitiativeParametesFile: $($initiativeGroupsFilePath)"
+            }
         
             $initiativeDefJson = Get-Content -Path $initiativeDefinitionFilePath
+            
+            # Replace the policy definitions ids by the id that will exist on the target.
+            if ($target) {
+                $finalTarget = "$($targetReplace)$target"
+                $initiativeDefJson = $initiativeDefJson -replace '(.*\"\:\s)(.*)(?<Rest>\/providers/Microsoft.Authorization/policy.*)\"',('$1"' + $finalTarget + '${Rest}"')
+                $initiativeDefJson | Out-File -FilePath "$($initativeId)-def-imported.json" -NoClobber
+                $importFileName = "$($initativeId)-def-imported.json"
+            }
+            
             $json = $initiativeDefJson | ConvertTo-Json -Depth 100
             Write-Verbose $json
 
-            $newInitiativeCommand = "New-AzPolicySetDefinition -Name ""$($initiativeName)"" -PolicyDefinition ""$($initiativeDefinitionFilePath)"""
+            $newInitiativeCommand = "New-AzPolicySetDefinition -Name ""$($initiativeName)"" -PolicyDefinition ""$($importFileName)"""
             
             if (Test-Path -Path $initiativeParametersFilePath -PathType Leaf) {
                 $newInitiativeCommand += " -Parameter ""$($initiativeParametersFilePath)"" "
+            }
+            
+            if (Test-Path -Path $initiativeGroupsFilePath -PathType Leaf) {
+                $newInitiativeCommand += " -PolicyDefinitionGroup ""$($initiativeGroupsFilePath)"" "
             }
             
             if ($nameMappings){
@@ -360,6 +393,8 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
             Write-Output "Initiative: $($initiativeName)"
             Write-Verbose $newInitiativeCommand
             Invoke-Expression -Command $newInitiativeCommand
+            Remove-Item -Path $importFileName
+
         }
     } 
 } else {

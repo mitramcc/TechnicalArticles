@@ -1,7 +1,7 @@
 # Copy Azure Policy Initiative definitions across scopes
 **Creation date:** 02 January 2024 \
-**Last Update:** 04 April 2025 \
-**Version:** 1.1
+**Last Update:** 02 June 2025 \
+**Latest Version:** 1.2
 
 ## Index
 - [Scenario](#Scenario)
@@ -14,6 +14,7 @@
 - [Example](#example)
 - [Known Limitations](#limitations-of-the-script)
 - [Best Practices](#recommendations)
+- [Release Notes](#release-notes)
 
 
 ## Teaser 
@@ -41,6 +42,7 @@ During the export phase some files and folders will be created therefore make su
 The new files created will be: 
 - <InitiativeId>.json - Azure Policy Initiative definition 
 - <InitiativeId>-params.json - Azure Policy Initiative definition parameters 
+- <InitiativeId>-groups.json - Azure Policy Initiative groups if the Azure Policy Initiative uses them. 
 - Folder with name of the InitiativeId that will contain custom policies. 
 - Mappings-<InitiativeId>.csv - this file is used to keep the original names and category of Azure Policy Initiative definition and Azure Policy definitions. 
  
@@ -142,6 +144,7 @@ You will end up with the following files:
 
 - The file “e1f68c1e15a64882b6552acd-def.json” will hold the Azure Policy Initiative definition with the reference to the Azure Policy definitions contained in it. 
 - The file “e1f68c1e15a64882b6552acd-params.json” will hold the Azure Policy Initiative definition parameters. 
+- The file “e1f68c1e15a64882b6552acd-groups.json” will hold the Azure Policy Initiative groups. 
 - The file “Mappings-e1f68c1e15a64882b6552acd.csv” will contain the relation between Azure Policy Initiative definition/Azure Policy definitions Ids and their display name and category.
 
 ![Screenshot of mappings file.](Picture4.png)
@@ -164,7 +167,7 @@ The built-in Azure Policy definitions exist by default in all subscriptions.
 ## Recommendations:
 It is recommended that you use the script in 2 steps: 
 - First you export and validate the exported data. 
-- Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. 
+- Then you adjust the ids of the Azure Policy Initiative json and import to the target scope. ()
 If you need to adjust the display names or categories of the Azure Policy Initiative definition and Azure Policy definitions you can use the mappings CSV that is created by the export part of the script. 
 - You should be able to run this on CloudShell if you upload the script there.
 
@@ -176,6 +179,14 @@ If you need to adjust the display names or categories of the Azure Policy Initia
 - [https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicydefinition?view=azps-11.1.0)
 - [https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0](https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azpolicysetdefinition?view=azps-11.1.0)
  
+
+ [Back to Index](#index)
+
+ ## Release Notes
+
+ Version 1.2:
+ - Added support to groups in the initiative
+ - Replace of target scope during import.
  
 ## Disclaimer: 
 **This script is not supported under any Microsoft standard support program or service. This script is provided AS IS without warranty of any kind. Microsoft further disclaims all implied warranties including, without limitation, any implied warranties of merchantability or of fitness for a particular purpose. The entire risk arising out of the use or performance of the script and documentation remains with you. In no event shall Microsoft, its authors, or anyone else involved in the creation, production, or delivery of the script be liable for any damages whatsoever (including, without limitation, damages for loss of business profits, business interruption, loss of business information, or other pecuniary loss) arising out of the use of or inability to use the current script or documentation, even if Microsoft has been advised of the possibility of such damages.**
