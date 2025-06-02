@@ -40,17 +40,17 @@ Policy Contributor on the Target Scope
 ## <a name="export">Export - Download from source:</a> 
 During the export phase some files and folders will be created therefore make sure you have permissions to write on the destination folder. 
 The new files created will be: 
-- <InitiativeId>.json - Azure Policy Initiative definition 
-- <InitiativeId>-params.json - Azure Policy Initiative definition parameters 
-- <InitiativeId>-groups.json - Azure Policy Initiative groups if the Azure Policy Initiative uses them. 
+- *InitiativeId*.json - Azure Policy Initiative definition 
+- *InitiativeId*-params.json - Azure Policy Initiative definition parameters 
+- *InitiativeId*-groups.json - Azure Policy Initiative groups if the Azure Policy Initiative uses them. 
 - Folder with name of the InitiativeId that will contain custom policies. 
-- Mappings-<InitiativeId>.csv - this file is used to keep the original names and category of Azure Policy Initiative definition and Azure Policy definitions. 
+- Mappings-*InitiativeId*.csv - this file is used to keep the original names and category of Azure Policy Initiative definition and Azure Policy definitions. 
  
 ## <a name="import">Import – Upload to the destination: </a>
 During the import, the script scans the folder looking for the value passed on the parameter $initiativeId . If it finds the json definition file, it will look for the folder that should have the custom Azure Policy definitions and it will start by creating those on the destination, once that completes it will use the Azure Policy Initiative definition file and create the Azure Policy Initiative. 
 When running this step separately you should make sure that the InitiativeId.json file is updated to reflect the target scope. 
 Example: you have exported from subscription AAA and you are importing to Management group XXX you need to replace each policyDefinitionId in the json from /subscription/AAA/ providers/Microsoft.Authorization/policyDefinitions/PolixyExample to /providers/microsoft.management/managementgroups/XXX/providers/microsoft.authorization/policyDefinitions/PolixyExample 
-- During import there is a file named <InitiativeId>-def-imported.json that is created and deleted this file holds the same definition with the target scope updated.
+- During import there is a file named *InitiativeId*-def-imported.json that is created and deleted this file holds the same definition with the target scope updated.
 
 
 [Back to Index](#index)
