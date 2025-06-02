@@ -393,6 +393,8 @@ if($direction -eq "Export" -or $direction -eq "Import" -or $direction -eq "Full"
             Write-Output "Initiative: $($initiativeName)"
             Write-Verbose $newInitiativeCommand
             Invoke-Expression -Command $newInitiativeCommand
+
+            #remove the file created to hold the string replacement
             Remove-Item -Path $importFileName
 
         }
